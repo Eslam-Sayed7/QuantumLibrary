@@ -22,7 +22,7 @@ public class BookStore
         foreach (var bk in books)
         {
             Console.WriteLine("book Id     Title  ");
-            Console.WriteLine($"{bk.getBookTitle()}   {bk.getBookTitle()}  ");
+            Console.WriteLine($"{bk.getISBN()}   {bk.getBookTitle()}  ");
         }
     }
 

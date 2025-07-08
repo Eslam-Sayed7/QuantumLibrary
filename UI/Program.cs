@@ -34,7 +34,15 @@ public class Program
                     break;
                 case "3":
                     var testbook = Testing.EBooktobuy;
-                    BookStoreServices.Buybook(testbook.getISBN() , 1 , "eslam@gmail.com");
+                    var res  = BookStoreServices.Buybook(testbook.getISBN() , 1 , "eslam@gmail.com");
+                    if( res)
+                    {
+                        Console.WriteLine($"book with title {testbook.getBookTitle()} is bought");
+                    }
+                    else
+                    {
+                        Console.WriteLine("this book is not in the database");
+                    }
                     break;
                 case "4":
                     BookStoreServices.ListOutDatedBooks();
