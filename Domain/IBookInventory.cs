@@ -10,5 +10,7 @@ public interface IBookInventory
     void AddBook<T>(T book) where T : Book;
     void RemoveBook<T>(T book) where T : Book;
     IEnumerable<Book> ReturnOutdatedBooksBefore(DateTime time);
+    IEnumerable<Book> getAllBooks();
+    T getBookById<T>(string id) where T: Book;
 
 }

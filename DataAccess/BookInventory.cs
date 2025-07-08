@@ -9,7 +9,6 @@ public class BookInventory : IBookInventory
     private IDictionary< string ,DemoBook> _demoBooks;
     private IDictionary< string ,EBook> _eBooks;
     private IDictionary<string, PaperBook> _paperBooks;
-    // private IDictionary<string, Book> _testBooks;
     
     public BookInventory()
     {
@@ -17,7 +16,52 @@ public class BookInventory : IBookInventory
         _eBooks = LoadEBooks();
         _paperBooks = LoadPaperBooks();
     }
-    
+
+    public T getBookById<T>(string id) where T : Book 
+    {
+        if (typeof(T) == typeof(PaperBook)) // used AI for this syntax 
+        {
+            _paperBooks.TryGetValue(id , out var result1);
+            if (result1 is not null)
+            {
+                return (T)(object) result1; // used AI for this syntax of casting
+            }
+        }
+
+        if (typeof(T) == typeof(EBook))
+        {
+            _eBooks.TryGetValue(id , out var result2);
+            if (result2 is not null)
+            {
+                return (T)(object) result2;
+            }
+        }
+
+        if (typeof(T) == typeof(DemoBook))
+        {
+            _eBooks.TryGetValue(id , out var result3);
+            if (result3 is not null)
+            {
+                return (T)(object) result3;
+            }
+        }
+        Console.WriteLine($"{id} is not a valid book id in the database");
+        return null;
+    }
+    public IEnumerable<Book>  getAllBooks()
+    {
+        var result1 = _paperBooks
+            .Select(bookPair => (Book) bookPair.Value); // asked Ai how to cast here 
+            
+        var result2 = _eBooks 
+            .Select(bookPair => (Book) bookPair.Value);
+             
+        var result3 = _demoBooks 
+            .Select(bookPair => (Book) bookPair.Value);
+         
+        IEnumerable<Book> result = result1.Concat(result2).Concat(result3);
+        return result; 
+    }
     public IDictionary<string,DemoBook> LoadDemoBooks()
     {
         return new Dictionary<string, DemoBook>()
@@ -30,7 +74,7 @@ public class BookInventory : IBookInventory
     {
         return new Dictionary<string, PaperBook>()
         {
-            { "111-111-111" , new PaperBook("111-111-111" , "Head First Object Oriented Analysis and Design" , DateTime.Now, 10)},
+            { "111-111-111" , new PaperBook("111-111-111" , "Head First Object Oriented Analysis and Design" , DateTime.Now, 10 , 30 , 600)},
         };
     }
 
@@ -38,7 +82,7 @@ public class BookInventory : IBookInventory
     {
         return new Dictionary<string, EBook>()
         {
-            { "333-333-333", new EBook("333-333-333", "Demo Angular in Depth" , DateTime.Now, "PDF") }
+            { "333-333-333", new EBook("333-333-333", "Demo Angular in Depth" , DateTime.Now, "PDF" , 10) }
         };
     }
 

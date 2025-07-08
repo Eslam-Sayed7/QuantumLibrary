@@ -1,4 +1,4 @@
-namespace Domain.ShippingService;
+namespace Domain;
 
 public abstract class Book
 {

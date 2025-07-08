@@ -2,5 +2,5 @@ namespace Domain;
 
 public interface Shippable
 {
-     void Ship();
+     double Ship( double costPergram);
 }

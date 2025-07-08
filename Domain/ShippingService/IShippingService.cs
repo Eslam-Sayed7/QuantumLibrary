@@ -2,5 +2,5 @@ namespace Domain.ShippingService;
 
 public interface IShippingService
 {
-    public void shipItem(ShippableItem item);
+    public void shipItem<T>(T item) where T: Shippable;
 }

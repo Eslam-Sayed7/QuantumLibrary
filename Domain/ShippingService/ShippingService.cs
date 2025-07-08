@@ -7,9 +7,10 @@ public class ShippingService : IShippingService
     public ShippingService()
     {
     }
-    public void shipItem( ShippableItem item )
+    public void shipItem<T>( T item ) where T : Shippable 
     {
-        item.Ship();
+        var taxes = item.Ship(ShippingTax);
+        Console.WriteLine($"this {item} is shiped with cost {taxes}");
     }
     
 }
